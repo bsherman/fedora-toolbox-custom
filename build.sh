@@ -5,7 +5,9 @@ set -ouex pipefail
 RELEASE="$(rpm -E %fedora)"
 
 dnf install -y \
+  cpio \
   direnv \
+  file \
   gh \
   hugo \
   jq \

@@ -8,8 +8,12 @@ dnf install -y \
   cpio \
   direnv \
   file \
+  fuse \
   gh \
+  gtk3 \
+  gtk4 \
   hugo \
+  jetbrains-mono-fonts-all \
   jq \
   patch \
   pre-commit \

@@ -11,6 +11,7 @@ dnf install -y \
   gh \
   hugo \
   jq \
+  patch \
   pre-commit \
   python3-pip \
   python3-virtualenv \

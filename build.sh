@@ -5,6 +5,7 @@ set -ouex pipefail
 RELEASE="$(rpm -E %fedora)"
 
 dnf install -y \
+  ccache \
   cpio \
   direnv \
   file \
@@ -20,7 +21,10 @@ dnf install -y \
   pre-commit \
   python3-pip \
   python3-virtualenv \
-  tmux
+  syslinux \
+  tmux \
+  xorriso \
+  xz-devel
 dnf update -y
 
 pip3 install yq

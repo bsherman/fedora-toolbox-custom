@@ -15,6 +15,7 @@ dnf install -y \
   hugo \
   jetbrains-mono-fonts-all \
   jq \
+  qt5-qtbase-gui \
   patch \
   pre-commit \
   python3-pip \

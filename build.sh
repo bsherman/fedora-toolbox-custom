@@ -23,8 +23,10 @@ dnf install -y \
   python3-virtualenv \
   syslinux \
   tmux \
+  vim \
   xorriso \
-  xz-devel
+  xz-devel \
+  yamllint
 dnf update -y
 
 pip3 install yq

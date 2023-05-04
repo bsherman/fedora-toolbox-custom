@@ -15,7 +15,6 @@ dnf install -y \
   gtk4 \
   hugo \
   jetbrains-mono-fonts-all \
-  jq \
   qt5-qtbase-gui \
   patch \
   pre-commit \
@@ -28,7 +27,5 @@ dnf install -y \
   xz-devel \
   yamllint
 dnf update -y
-
-pip3 install yq
 
 dnf clean all

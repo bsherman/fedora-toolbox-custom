@@ -5,6 +5,7 @@ set -ouex pipefail
 RELEASE="$(rpm -E %fedora)"
 
 dnf install -y \
+  bind-utils \
   ccache \
   cpio \
   direnv \

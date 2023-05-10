@@ -12,15 +12,16 @@ dnf install -y \
   file \
   fuse \
   gh \
+  google-droid-fonts-all \
   gtk3 \
   gtk4 \
   hugo \
-  jetbrains-mono-fonts-all \
   qt5-qtbase-gui \
   patch \
   pre-commit \
   python3-pip \
   python3-virtualenv \
+  source-foundry-hack-fonts \
   syslinux \
   tmux \
   vim \

@@ -9,6 +9,7 @@ dnf install -y \
   ccache \
   cpio \
   direnv \
+  dosfstools \
   file \
   fuse \
   gh \

@@ -17,6 +17,7 @@ dnf install -y \
   gtk3 \
   gtk4 \
   hugo \
+  nodejs \
   qt5-qtbase-gui \
   patch \
   pre-commit \

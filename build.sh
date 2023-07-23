@@ -17,9 +17,11 @@ dnf install -y \
   gtk3 \
   gtk4 \
   hugo \
+  ipcalc \
   nodejs \
   qt5-qtbase-gui \
   patch \
+  pipx \
   pre-commit \
   python3-pip \
   python3-virtualenv \

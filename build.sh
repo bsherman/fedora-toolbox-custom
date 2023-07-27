@@ -23,6 +23,7 @@ dnf install -y \
   patch \
   pipx \
   pre-commit \
+  python-unversioned-command \
   python3-pip \
   python3-virtualenv \
   source-foundry-hack-fonts \

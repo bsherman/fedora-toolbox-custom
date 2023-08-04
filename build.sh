@@ -18,6 +18,7 @@ dnf install -y \
   gtk4 \
   hugo \
   ipcalc \
+  just \
   nodejs \
   qt5-qtbase-gui \
   patch \

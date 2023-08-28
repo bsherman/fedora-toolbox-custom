@@ -26,6 +26,7 @@ dnf install -y \
   nodejs \
   qt5-qtbase-gui \
   patch \
+  pinentry \
   pipx \
   pre-commit \
   python-unversioned-command \

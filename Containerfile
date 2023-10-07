@@ -92,10 +92,12 @@ RUN dnf install -y \
         xz-devel \
         yamllint
 
-# Pre-install host-spawn and distrobox-host-exec
+# Pre-install host-spawn and distrobox-host-exec with a patch to include DOCKER_HOST env
 ADD host-spawn-with-docker-host.patch /tmp/
 RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
-    cp /tmp/distrobox/distrobox-host-exec /usr/bin/distrobox-host-exec && \
+    cd /tmp/distrobox && \
+    git apply /tmp/host-spawn-with-docker-host.patch && \
+    cp /tmp/distrobox/distrobox-host-exec /usr/bin/distrobox-host-exec-env && \
     wget https://github.com/1player/host-spawn/releases/download/$(cat /tmp/distrobox/distrobox-host-exec | grep host_spawn_version= | cut -d "\"" -f 2)/host-spawn-$(uname -m) -O /usr/bin/host-spawn && \
     chmod +x /usr/bin/host-spawn && \
     rm -drf /tmp/distrobox
@@ -106,10 +108,10 @@ RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
     dnf install -y code
 
 # run some things out of the host
-RUN ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/buildah && \
-    ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/cosign && \
-    ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
-    ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/skopeo && \
+RUN ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/buildah && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/cosign && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/podman && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/skopeo && \
     ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \
     ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/htop && \
     ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open

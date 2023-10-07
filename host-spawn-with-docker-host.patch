@@ -1,0 +1,18 @@
+diff --git a/distrobox-host-exec b/distrobox-host-exec
+index 915f7bf..999dd24 100755
+--- a/distrobox-host-exec
++++ b/distrobox-host-exec
+@@ -205,11 +205,11 @@ if [ "$(basename "${host_command}")" = "xdg-open" ] ||
+ 	[ ! -t 1 ] ||
+ 	! tty > /dev/null 2>&1; then
+ 
+-	host-spawn --no-pty "${host_command}" "$@"
++	host-spawn -env DOCKER_HOST --no-pty "${host_command}" "$@"
+ 	# Exit here, we don't continue execution
+ 	exit $?
+ fi
+ 
+-host-spawn "${host_command}" "$@"
++host-spawn -env DOCKER_HOST "${host_command}" "$@"
+ # Exit here, we don't continue execution
+ exit $?

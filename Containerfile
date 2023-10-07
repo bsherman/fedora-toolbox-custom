@@ -59,9 +59,33 @@ RUN dnf install -y \
         mesa-vulkan-drivers \
         vulkan
 
+# Pre-install host-spawn and distrobox-host-exec with a patch to include DOCKER_HOST env
+ADD host-spawn-with-docker-host.patch /tmp/
+RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
+    cd /tmp/distrobox && \
+    git apply /tmp/host-spawn-with-docker-host.patch && \
+    cp /tmp/distrobox/distrobox-host-exec /usr/bin/distrobox-host-exec-env && \
+    wget https://github.com/1player/host-spawn/releases/download/$(cat /tmp/distrobox/distrobox-host-exec | grep host_spawn_version= | cut -d "\"" -f 2)/host-spawn-$(uname -m) -O /usr/bin/host-spawn && \
+    chmod +x /usr/bin/host-spawn && \
+    rm -drf /tmp/distrobox
+
+# Set up cleaner Distrobox integration and run some things from host
+RUN dnf install -y 'dnf-command(copr)' && \
+    dnf copr enable -y kylegospo/distrobox-utils && \
+    dnf install -y \
+        xdg-utils-distrobox \
+        adw-gtk3-theme && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/buildah && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/cosign && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/docker && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/docker-compose && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/podman && \
+    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/skopeo && \
+    ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \
+    ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/htop
+
 # Personalized packages
 RUN dnf install -y \
-        adw-gtk3-theme \
         bind-utils \
         ccache \
         cpio \
@@ -76,6 +100,7 @@ RUN dnf install -y \
         ipcalc \
         jq \
         just \
+        nmap \
         nodejs \
         qt5-qtbase-gui \
         patch \
@@ -92,29 +117,10 @@ RUN dnf install -y \
         xz-devel \
         yamllint
 
-# Pre-install host-spawn and distrobox-host-exec with a patch to include DOCKER_HOST env
-ADD host-spawn-with-docker-host.patch /tmp/
-RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
-    cd /tmp/distrobox && \
-    git apply /tmp/host-spawn-with-docker-host.patch && \
-    cp /tmp/distrobox/distrobox-host-exec /usr/bin/distrobox-host-exec-env && \
-    wget https://github.com/1player/host-spawn/releases/download/$(cat /tmp/distrobox/distrobox-host-exec | grep host_spawn_version= | cut -d "\"" -f 2)/host-spawn-$(uname -m) -O /usr/bin/host-spawn && \
-    chmod +x /usr/bin/host-spawn && \
-    rm -drf /tmp/distrobox
-
 # install microsoft VS Code
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
     sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo' && \
     dnf install -y code
-
-# run some things out of the host
-RUN ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/buildah && \
-    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/cosign && \
-    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/podman && \
-    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/skopeo && \
-    ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \
-    ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/htop && \
-    ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open
 
 # Cleanup
 RUN rm -rf /tmp/* && \

@@ -76,7 +76,6 @@ RUN dnf install -y 'dnf-command(copr)' && \
         xdg-utils-distrobox \
         adw-gtk3-theme && \
     ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/buildah && \
-    ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/cosign && \
     ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/docker && \
     ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/docker-compose && \
     ln -sf /usr/bin/distrobox-host-exec-env /usr/local/bin/podman && \

@@ -107,18 +107,13 @@ RUN dnf install -y --setopt=install_weak_deps=False \
         cpio \
         dosfstools \
         file \
-        fuse \
         gh \
-        gtk3 \
-        gtk4 \
         ipcalc \
         jq \
         just \
         nmap \
-        qt5-qtbase-gui \
         patch \
         pinentry \
-        pipx \
         python-unversioned-command \
         python3-pip \
         python3-virtualenv \
@@ -127,6 +122,13 @@ RUN dnf install -y --setopt=install_weak_deps=False \
         vim \
         xorriso \
         xz-devel
+
+# install dependencies for JetBrains IDEs
+RUN dnf install -y \
+        fuse \
+        gtk3 \
+        gtk4 \
+        qt5-qtbase-gui
 
 # install microsoft VS Code
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \

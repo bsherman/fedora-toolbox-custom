@@ -83,29 +83,42 @@ RUN dnf install -y 'dnf-command(copr)' && \
     ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \
     ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/htop
 
+# Install basic dev tools & libs
+RUN dnf install -y --setopt=install_weak_deps=False \
+    autoconf \
+    automake \
+    binutils \
+    cmake \
+    gcc \
+    gcc-c++ \
+    gdb \
+    glibc-devel \
+    indent \
+    libtool \
+    ltrace \
+    patch \
+    pkgconf \
+    strace
+
 # Personalized packages
-RUN dnf install -y \
+RUN dnf install -y --setopt=install_weak_deps=False \
         bind-utils \
         ccache \
         cpio \
-        direnv \
         dosfstools \
         file \
         fuse \
         gh \
         gtk3 \
         gtk4 \
-        hugo \
         ipcalc \
         jq \
         just \
         nmap \
-        nodejs \
         qt5-qtbase-gui \
         patch \
         pinentry \
         pipx \
-        pre-commit \
         python-unversioned-command \
         python3-pip \
         python3-virtualenv \
@@ -113,8 +126,7 @@ RUN dnf install -y \
         tmux \
         vim \
         xorriso \
-        xz-devel \
-        yamllint
+        xz-devel
 
 # install microsoft VS Code
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \

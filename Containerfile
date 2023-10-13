@@ -111,6 +111,7 @@ RUN dnf install -y --setopt=install_weak_deps=False \
         ipcalc \
         jq \
         just \
+        mosquitto \
         nmap \
         patch \
         pinentry \

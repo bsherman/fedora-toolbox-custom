@@ -125,11 +125,11 @@ RUN dnf install -y --setopt=install_weak_deps=False \
         xz-devel
 
 # install dependencies for JetBrains IDEs
-RUN dnf install -y \
-        fuse \
-        gtk3 \
-        gtk4 \
-        qt5-qtbase-gui
+#RUN dnf install -y \
+#        fuse \
+#        gtk3 \
+#        gtk4 \
+#        qt5-qtbase-gui
 
 # install microsoft VS Code
 #RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \

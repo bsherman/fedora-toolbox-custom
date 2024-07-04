@@ -124,6 +124,10 @@ RUN dnf install -y --setopt=install_weak_deps=False \
         xorriso \
         xz-devel
 
+# install version fox
+COPY versionfox.repo /etc/yum.repos.d/
+RUN dnf install -y vfox
+
 # install dependencies for JetBrains IDEs
 #RUN dnf install -y \
 #        fuse \

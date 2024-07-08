@@ -114,6 +114,7 @@ RUN dnf install -y --setopt=install_weak_deps=False \
         just \
         mosquitto \
         nmap \
+        pipx \
         patch \
         pinentry \
         python-unversioned-command \
@@ -124,9 +125,15 @@ RUN dnf install -y --setopt=install_weak_deps=False \
         xorriso \
         xz-devel
 
-# install version fox
-COPY versionfox.repo /etc/yum.repos.d/
-RUN dnf install -y vfox
+# deps for building python
+RUN dnf install -y --setopt=install_weak_deps=False \
+        bzip2-devel \
+        libffi-devel \
+        ncurses-devel \
+        openssl-devel \
+        readline-devel \
+        sqlite-devel \
+        zlib-devel
 
 # install dependencies for JetBrains IDEs
 #RUN dnf install -y \

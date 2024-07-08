@@ -1,5 +1,0 @@
-[vfox]
-name=VersionFox Repo
-baseurl=https://yum.fury.io/versionfox/
-enabled=1
-gpgcheck=0

@@ -112,6 +112,7 @@ RUN dnf install -y --setopt=install_weak_deps=False \
         ipcalc \
         jq \
         just \
+        mosh \
         mosquitto \
         nmap \
         pipx \

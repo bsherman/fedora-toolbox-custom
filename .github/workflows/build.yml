@@ -3,13 +3,17 @@ on:
   pull_request:
     branches:
       - main
-  schedule:
-    - cron: '35 21 * * *' # 9:35pm UTC everyday
+    paths-ignore:
+      - '.github/workflows/cleanup*.yml'
+      - '**.md'
   push:
     branches:
       - main
     paths-ignore:
-      - '**/README.md'
+      - '.github/workflows/cleanup*.yml'
+      - '**.md'
+  schedule:
+    - cron: '35 21 * * *' # 9:35pm UTC everyday
   workflow_dispatch:
 
 env:
